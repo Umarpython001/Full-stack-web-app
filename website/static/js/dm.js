@@ -11,6 +11,15 @@ const message_div = document.getElementById('messageFeed')
 let submit_btn = document.getElementById('send-btn')
 
 
+//Render marked content(markdown content) in the message feed
+document.addEventListener("DOMContentLoaded", function() {
+    // Find every message content on the page
+    document.querySelectorAll('.msg-content').forEach(el => {
+        // Convert the text inside the element to Markdown HTML
+        el.innerHTML = marked.parse(el.textContent);
+    });
+});
+
 
 
 function sendMesssageHUMAN(){
@@ -46,11 +55,13 @@ socket.on('receive_message_human', function(data){
     let sender = data.sender //The user id of the sender
     let timestamp = data.timestamp //The timestamp of when the message was sent
 
+    const htmlResult = marked.parse(msg_content);
+
     let new_msg = `
     
                     <div class="message-wrapper ${ (sender == current_user) ? 'sent' : 'received'}">
                         <div class="message-bubble">
-                            <p> ${msg_content} </p>
+                            <p class="msg-content"> ${htmlResult} </p>
                             <span class="timestamp"> ${timestamp} </span>
                         </div>
                     </div>
