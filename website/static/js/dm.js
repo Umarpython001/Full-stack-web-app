@@ -55,7 +55,7 @@ socket.on('receive_message_human', function(data){
     let sender = data.sender //The user id of the sender
     let timestamp = data.timestamp //The timestamp of when the message was sent
 
-    const htmlResult = marked.parse(msg_content);
+    let htmlResult = marked.parse(msg_content);
 
     let new_msg = `
     
