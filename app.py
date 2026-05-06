@@ -6,7 +6,6 @@ load_dotenv()
 
 if __name__ == "__main__":
     app = create_app()
-    socketio.init_app(app)
 
     is_debug = os.getenv("FLASK_DEBUG", "0") == "1"
 
