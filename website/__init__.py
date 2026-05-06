@@ -47,6 +47,7 @@ def create_app():
 
 
     db.init_app(app)
+    socketio.init_app(app, async_mode="eventlet", cors_allowed_origins="*")
 
     from .views import views
     from .auth import auth
